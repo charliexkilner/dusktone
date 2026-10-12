@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dusktone
 
-## Getting Started
+An independent booking agency + mixcast rooted in the underground.
 
-First, run the development server:
+Next.js (App Router), deployed on Vercel.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing the site
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| Roster | `data/artists.ts` — add `{ name, raSlug }`. `raSlug` is the end of the artist's RA url (`ra.co/dj/<raSlug>`). Optional `image` (a file in `public/artists/`), `bio` and `links`. |
+| Description, contact address, SoundCloud account | `data/site.ts` |
+| Background footage | Drop `loop.mp4` (and optionally `loop.webm`, `poster.jpg`) into `public/video/`. Until then the home page shows an animated dusk gradient. |
+| ASCII logo | Replace `scripts/logo-source.png`, then `npm run logo`. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Upcoming gigs are read from each artist's Resident Advisor page and the mix-cast is read from the DuskTone SoundCloud feed. Both refresh hourly, so new dates and new mixes appear without a redeploy.
 
-## Learn More
+## Contact form
 
-To learn more about Next.js, take a look at the following resources:
+The pop-up posts to `/api/contact`, which sends mail through [Resend](https://resend.com). Set these in Vercel → Project → Settings → Environment Variables (see `.env.example`):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `RESEND_API_KEY`
+- `CONTACT_TO` — where enquiries land (defaults to `contactEmail` in `data/site.ts`)
+- `CONTACT_FROM` — optional, a sender on a domain verified with Resend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Without a key the form falls back to opening the visitor's mail app addressed to `contactEmail`.
