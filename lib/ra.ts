@@ -14,10 +14,18 @@ export type RaArtist = {
   name: string;
   image: string | null;
   url: string;
+  instagram: string | null;
+  soundcloud: string | null;
   gigs: Gig[];
 };
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+// Profile links are typed in by artists: keep only clean https urls, minus tracking params.
+function cleanLink(url: unknown) {
+  if (typeof url !== "string" || !url.startsWith("https://")) return null;
+  return url.split("?")[0];
+}
 
 // RA dates are local to the venue ("2026-10-17T00:00:00.000"), so format the string itself.
 function formatDate(iso: string) {
@@ -30,6 +38,8 @@ const QUERY = `query Artist($slug: String!) {
     name
     image
     contentUrl
+    instagram
+    soundcloud
     events(limit: 12, type: LATEST) {
       id
       title
@@ -72,6 +82,8 @@ export async function getRaArtist(slug: string): Promise<RaArtist | null> {
       name: artist.name,
       image: artist.image ?? null,
       url: `https://ra.co${artist.contentUrl}`,
+      instagram: cleanLink(artist.instagram),
+      soundcloud: cleanLink(artist.soundcloud),
       gigs: (artist.events as RaEvent[]).map((e) => ({
         id: e.id,
         title: e.title,

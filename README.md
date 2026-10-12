@@ -9,13 +9,15 @@ npm install
 npm run dev
 ```
 
+Keep this folder out of iCloud Drive (a synced Desktop or Documents folder): macOS evicts project files to the cloud when disk space is low, which breaks the dev server. A folder name ending in `.nosync` is skipped by iCloud.
+
 ## Editing the site
 
 | What | Where |
 | --- | --- |
-| Roster | `data/artists.ts` — add `{ name, raSlug }`. `raSlug` is the end of the artist's RA url (`ra.co/dj/<raSlug>`). Optional `image` (a file in `public/artists/`), `bio` and `links`. |
+| Roster | `data/artists.ts` — add `{ name, raSlug }`. `raSlug` is the end of the artist's RA url (`ra.co/dj/<raSlug>`); leave it out until they have a page. Photo, Instagram and SoundCloud links come from RA. Optional `image` (a file in `public/artists/`), `bio` and extra `links`. |
 | Description, contact address, SoundCloud account | `data/site.ts` |
-| Background footage | Drop `loop.mp4` (and optionally `loop.webm`, `poster.jpg`) into `public/video/`. Until then the home page shows an animated dusk gradient. |
+| Background footage | `youtubeId` in `data/site.ts` plays a muted YouTube video behind the home page. To use your own file instead, drop `loop.mp4` (and optionally `loop.webm`, `poster.jpg`) into `public/video/` — a file wins over the embed. Opacity, white glow and film grain are the three `--video-opacity` / `--glow` / `--grain` values at the top of the background block in `app/globals.css`. |
 | ASCII logo | Replace `scripts/logo-source.png`, then `npm run logo`. |
 
 Upcoming gigs are read from each artist's Resident Advisor page and the mix-cast is read from the DuskTone SoundCloud feed. Both refresh hourly, so new dates and new mixes appear without a redeploy.
