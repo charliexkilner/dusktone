@@ -1,12 +1,15 @@
 import { AsciiLogo } from "@/components/AsciiLogo";
 import { Background } from "@/components/Background";
 import { SiteNav } from "@/components/SiteHeader";
+import type { Viewport } from "next";
 import { site } from "@/data/site";
+
+export const viewport: Viewport = { themeColor: "#0b0a08" };
 
 export default function Home() {
   return (
     <main className="home">
-      <Background video />
+      <Background />
       <AsciiLogo />
       <h1 className="home-word">
         <span aria-hidden="true">⋆₊ ⊹</span>

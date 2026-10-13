@@ -51,4 +51,4 @@ export async function getMixes(): Promise<Mix[]> {
 
 export const embedUrl = (trackUrl: string) =>
   `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}` +
-  "&color=%23c9a24a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false";
+  "&color=%236b7545&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false";

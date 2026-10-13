@@ -1,17 +1,16 @@
-import type { Metadata } from "next";
-import { Background } from "@/components/Background";
+import type { Metadata, Viewport } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { site } from "@/data/site";
 import { embedUrl, getMixes } from "@/lib/soundcloud";
 
 export const metadata: Metadata = { title: "Mix-cast" };
+export const viewport: Viewport = { themeColor: "#f4f4f0" };
 
 export default async function MixcastPage() {
   const mixes = await getMixes();
 
   return (
     <>
-      <Background />
       <SiteHeader />
       <main className="page page-narrow">
         <p className="eyebrow">Mix-cast</p>
@@ -21,13 +20,15 @@ export default async function MixcastPage() {
               <h2>{mix.title}</h2>
               {mix.date && <time>{mix.date}</time>}
               {mix.description && <p>{mix.description}</p>}
-              <iframe
-                title={mix.title}
-                src={embedUrl(mix.url)}
-                height={166}
-                loading="lazy"
-                allow="autoplay"
-              />
+              <div className="mix-player">
+                <iframe
+                  title={mix.title}
+                  src={embedUrl(mix.url)}
+                  height={166}
+                  loading="lazy"
+                  allow="autoplay"
+                />
+              </div>
             </article>
           ))}
         </div>

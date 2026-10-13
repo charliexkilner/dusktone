@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import { Background } from "@/components/Background";
+import type { Metadata, Viewport } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { artists, artistAnchor } from "@/data/artists";
 import { getRaArtist } from "@/lib/ra";
 
 export const metadata: Metadata = { title: "Roster" };
+export const viewport: Viewport = { themeColor: "#f4f4f0" };
 
 export default async function RosterPage() {
   const roster = await Promise.all(
@@ -16,14 +16,18 @@ export default async function RosterPage() {
 
   return (
     <>
-      <Background />
       <SiteHeader />
       <main className="page">
         <p className="eyebrow">Roster</p>
         <ul className="roster-index">
           {artists.map((a) => (
             <li key={a.name}>
-              <a href={`#${artistAnchor(a)}`}>{a.name}</a>
+              <a href={`#${artistAnchor(a)}`}>
+                {a.name}
+                <span className="roster-icon" aria-hidden="true">
+                  {a.icon ?? "⊹"}
+                </span>
+              </a>
             </li>
           ))}
         </ul>

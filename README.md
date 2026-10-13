@@ -15,7 +15,7 @@ Keep this folder out of iCloud Drive (a synced Desktop or Documents folder): mac
 
 | What | Where |
 | --- | --- |
-| Roster | `data/artists.ts` — add `{ name, raSlug }`. `raSlug` is the end of the artist's RA url (`ra.co/dj/<raSlug>`); leave it out until they have a page. Photo, Instagram and SoundCloud links come from RA. Optional `image` (a file in `public/artists/`), `bio` and extra `links`. |
+| Roster | `data/artists.ts` — add `{ name, raSlug }`. `raSlug` is the end of the artist's RA url (`ra.co/dj/<raSlug>`); leave it out until they have a page. Photo, Instagram and SoundCloud links come from RA. `icon` is the mark shown beside the name on hover. Optional `image` (a file in `public/artists/`), `bio` and extra `links`. |
 | Description, contact address, SoundCloud account | `data/site.ts` |
 | Background footage | `youtubeId` in `data/site.ts` plays a muted YouTube video behind the home page. To use your own file instead, drop `loop.mp4` (and optionally `loop.webm`, `poster.jpg`) into `public/video/` — a file wins over the embed. Opacity, white glow and film grain are the three `--video-opacity` / `--glow` / `--grain` values at the top of the background block in `app/globals.css`. |
 | ASCII logo | Replace `scripts/logo-source.png`, then `npm run logo`. |
