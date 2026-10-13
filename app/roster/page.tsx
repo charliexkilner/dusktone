@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import { BookButton } from "@/components/Contact";
 import { SiteHeader } from "@/components/SiteHeader";
 import { artists, artistAnchor } from "@/data/artists";
 import { getRaArtist } from "@/lib/ra";
 
 export const metadata: Metadata = { title: "Roster" };
-export const viewport: Viewport = { themeColor: "#f4f4f0" };
+export const viewport: Viewport = { themeColor: "#ffffff" };
 
 export default async function RosterPage() {
   const roster = await Promise.all(
@@ -84,15 +85,14 @@ export default async function RosterPage() {
                   </p>
                 )}
 
-                {links.length > 0 && (
-                  <p className="card-links">
-                    {links.map((l) => (
-                      <a href={l.href} target="_blank" rel="noreferrer" key={l.href}>
-                        {l.label} ↗
-                      </a>
-                    ))}
-                  </p>
-                )}
+                <div className="card-links">
+                  <BookButton artist={artist.name} />
+                  {links.map((l) => (
+                    <a href={l.href} target="_blank" rel="noreferrer" key={l.href}>
+                      {l.label} ↗
+                    </a>
+                  ))}
+                </div>
               </article>
             );
           })}

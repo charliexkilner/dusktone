@@ -8,6 +8,7 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const email = String(body?.email ?? "").trim();
   const message = String(body?.message ?? "").trim();
+  const subject = String(body?.subject ?? "").replace(/[\r\n]+/g, " ").trim().slice(0, 200);
 
   // honeypot filled in: pretend it worked
   if (body?.website) return Response.json({ ok: true });
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
       from: process.env.CONTACT_FROM || `${site.name} <onboarding@resend.dev>`,
       to,
       reply_to: email,
-      subject: `${site.name} enquiry from ${email}`,
+      subject: subject || `${site.name} enquiry from ${email}`,
       text: `From: ${email}\n\n${message}`,
     }),
   });

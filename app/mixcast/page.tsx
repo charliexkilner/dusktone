@@ -4,7 +4,7 @@ import { site } from "@/data/site";
 import { embedUrl, getMixes } from "@/lib/soundcloud";
 
 export const metadata: Metadata = { title: "Mix-cast" };
-export const viewport: Viewport = { themeColor: "#f4f4f0" };
+export const viewport: Viewport = { themeColor: "#ffffff" };
 
 export default async function MixcastPage() {
   const mixes = await getMixes();

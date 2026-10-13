@@ -14,3 +14,17 @@ export const site = {
     poster: "/video/poster.jpg",
   },
 };
+
+/** What the "Book <artist>" buttons drop into the contact pop-up. */
+export const bookingEnquiry = (artist: string) => ({
+  subject: `${artist} Booking Enquiry`,
+  message: `Hiya I would like to make an enquiry to book ${artist} for an upcoming party please see info below:
+
+Date:
+Location:
+Venue:
+Promoter:
+Additional Information:
+
+Thanks!`,
+});

@@ -1,10 +1,9 @@
 :root {
-  /* roster + mix-cast: off-white paper, slate ink, olive accent */
-  --paper: #f4f4f0;
+  /* roster + mix-cast: white paper, slate ink, olive accent */
+  --paper: #fff;
   --ink: #2c3434;
   --dim: #5c6464;
   --accent: #6b7545;
-  --lift: #fafaf7;
   /* home: the dark behind the footage */
   --night: #0b0a08;
   color-scheme: light;
@@ -509,7 +508,8 @@ video.bg-media.is-playing {
 .card-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 20px;
+  align-items: center;
+  gap: 10px 20px;
   margin-top: 16px;
   font-size: 12px;
   letter-spacing: 0.06em;
@@ -519,6 +519,21 @@ video.bg-media.is-playing {
 
 .card-links a:hover {
   color: var(--accent);
+}
+
+.book {
+  padding: 7px 12px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.book:hover {
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
 /* mix-cast: one card per mix, title through to the player */
@@ -531,7 +546,6 @@ video.bg-media.is-playing {
 .mix {
   padding: clamp(18px, 3vw, 28px);
   border: 1px solid var(--ink);
-  background: var(--lift);
 }
 
 .mix h2 {
@@ -643,7 +657,7 @@ video.bg-media.is-playing {
 }
 
 .contact textarea {
-  height: min(44svh, 320px);
+  height: min(40svh, 300px);
   resize: none;
 }
 

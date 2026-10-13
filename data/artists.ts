@@ -10,7 +10,7 @@ export type Artist = {
   links?: { label: string; href: string }[];
 };
 
-// The roster. Order here is the order on the page.
+// The roster. Add artists in any order: the page lists them alphabetically.
 export const artists: Artist[] = [
   { name: "Neev", raSlug: "neev", icon: "⊹" },
   { name: "Tia Radkiewicz", icon: "𓍊" },
@@ -19,7 +19,7 @@ export const artists: Artist[] = [
   { name: "Larushkin", raSlug: "larushkin", icon: "☼" },
   { name: "Goose", raSlug: "goose-3", icon: "𓅬" },
   { name: "Touré", raSlug: "toure", icon: "★" },
-];
+].sort((a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" }));
 
 /** "Touré" → "toure", "Sleepy Jean" → "sleepy-jean" */
 export const artistAnchor = (a: Artist) =>
