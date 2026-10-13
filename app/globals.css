@@ -31,7 +31,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body:has(.home) {
+/* set by NightTheme while the home page is showing */
+.night body {
   background: var(--night);
 }
 
@@ -374,7 +375,7 @@ video.bg-media.is-playing {
   display: inline-flex;
   align-items: baseline;
   gap: 0.28em;
-  font-size: clamp(32px, 6.6vw, 80px);
+  font-size: clamp(32px, 3.2vw, 46px);
   line-height: 1.1;
   transition: color 0.2s;
 }

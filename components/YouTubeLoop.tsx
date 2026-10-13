@@ -50,10 +50,14 @@ export function YouTubeLoop({ id }: { id: string }) {
 
     window.addEventListener("message", onMessage);
     document.addEventListener("visibilitychange", onVisible);
+    // Runs on unmount, and also when Next.js keeps this page alive but hidden after a
+    // client-side navigation: stop the footage, and let it fade back in on return.
     return () => {
       clearInterval(retry);
       window.removeEventListener("message", onMessage);
       document.removeEventListener("visibilitychange", onVisible);
+      send({ event: "command", func: "pauseVideo", args: [] });
+      setPlaying(false);
     };
   }, []);
 
