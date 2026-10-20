@@ -216,31 +216,19 @@ video.bg-media.is-playing {
 }
 
 .home-word {
-  display: flex;
-  align-items: center;
-  gap: 1.4em;
-  font-size: clamp(15px, 2.1vw, 22px);
+  font-size: clamp(20px, 2.8vw, 30px);
   font-weight: 400;
   letter-spacing: 0.5em;
+  /* balances the letter-space after the last letter so the name sits dead centre */
+  padding-left: 0.5em;
   text-transform: lowercase;
-}
-
-/* cancel the trailing letter-space so the name sits dead centre */
-.home-word b {
-  font-weight: 400;
-  margin-right: -0.5em;
-}
-
-.home-word span {
-  letter-spacing: 0.1em;
-  opacity: 0.75;
 }
 
 .nav {
   display: flex;
   align-items: center;
   gap: clamp(10px, 2vw, 22px);
-  font-size: clamp(13px, 1.5vw, 16px);
+  font-size: clamp(14px, 1.6vw, 17px);
   letter-spacing: 0.08em;
   text-transform: lowercase;
 }
@@ -267,7 +255,7 @@ video.bg-media.is-playing {
 
 .home-desc {
   max-width: 40ch;
-  font-size: clamp(12px, 1.35vw, 15px);
+  font-size: clamp(13px, 1.45vw, 16px);
   letter-spacing: 0.03em;
   text-wrap: balance;
 }
@@ -367,11 +355,6 @@ video.bg-media.is-playing {
   .artist {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   }
-}
-
-.artist-photo {
-  padding: 12px;
-  border: 1px solid var(--accent);
 }
 
 .artist-photo img,

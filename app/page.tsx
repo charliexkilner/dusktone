@@ -11,11 +11,7 @@ export default function Home() {
     <main className="home">
       <NightTheme />
       <Background />
-      <h1 className="home-word">
-        <span aria-hidden="true">⋆₊ ⊹</span>
-        <b>{site.name}</b>
-        <span aria-hidden="true">⊹ ₊⋆</span>
-      </h1>
+      <h1 className="home-word">{site.name}</h1>
       <SiteNav />
       <p className="home-desc">{site.description}</p>
     </main>
