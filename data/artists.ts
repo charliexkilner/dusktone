@@ -11,7 +11,7 @@ export type Artist = {
 // The roster. Add artists in any order: the page lists them alphabetically.
 // Each artist gets a page at /<name>, e.g. /toure or /sleepy-jean.
 export const artists: Artist[] = [
-  { name: "Neev", raSlug: "neev" },
+  { name: "Neev", raSlug: "neev." }, // the full stop is part of her RA address
   { name: "Tia Radkiewicz" },
   { name: "Sleepy Jean", raSlug: "sleepyjean" },
   { name: "Holly Why", raSlug: "hollywhy" },
