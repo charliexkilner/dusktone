@@ -19,8 +19,10 @@ export function YouTubeLoop({ id }: { id: string }) {
     const el = frame.current;
     if (!el) return;
 
+    // "*" because these first messages can reach the frame before it has loaded
+    // YouTube; they carry only player commands, and replies are origin-checked below.
     const send = (msg: object) =>
-      el.contentWindow?.postMessage(JSON.stringify({ ...msg, id: 1, channel: "widget" }), ORIGIN);
+      el.contentWindow?.postMessage(JSON.stringify({ ...msg, id: 1, channel: "widget" }), "*");
     const play = () => send({ event: "command", func: "playVideo", args: [] });
 
     // Ask the player to report its state; repeat until it has booted and answers.

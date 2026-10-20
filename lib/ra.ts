@@ -5,6 +5,8 @@ export type Gig = {
   title: string;
   /** e.g. "17 OCT 2026" */
   date: string;
+  /** e.g. "2026-10-17", the date where the gig happens */
+  day: string;
   venue: string | null;
   city: string | null;
   url: string;
@@ -88,6 +90,7 @@ export async function getRaArtist(slug: string): Promise<RaArtist | null> {
         id: e.id,
         title: e.title,
         date: formatDate(e.date),
+        day: e.date.slice(0, 10),
         venue: e.venue?.name ?? null,
         city: e.venue?.area?.name ?? null,
         url: `https://ra.co${e.contentUrl}`,
@@ -96,4 +99,14 @@ export async function getRaArtist(slug: string): Promise<RaArtist | null> {
   } catch {
     return null;
   }
+}
+
+/**
+ * Drops gigs whose day is over. Dates are compared in UK time, where the agency
+ * is based, so a gig disappears at midnight at the end of its day.
+ * Call this per request (after connection()), not inside a cached function.
+ */
+export function stillToCome(gigs: Gig[]) {
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date());
+  return gigs.filter((g) => g.day >= today);
 }

@@ -5,27 +5,28 @@ export type Artist = {
   /** Optional press shot in /public/artists. Falls back to the RA profile image. */
   image?: string;
   bio?: string;
-  /** Shown beside the name in the roster list on hover. */
-  icon?: string;
   links?: { label: string; href: string }[];
 };
 
 // The roster. Add artists in any order: the page lists them alphabetically.
+// Each artist gets a page at /<name>, e.g. /toure or /sleepy-jean.
 export const artists: Artist[] = [
-  { name: "Neev", raSlug: "neev", icon: "⊹" },
-  { name: "Tia Radkiewicz", icon: "𓍊" },
-  { name: "Sleepy Jean", raSlug: "sleepyjean", icon: "☾" },
-  { name: "Holly Why", raSlug: "hollywhy", icon: "❋" },
-  { name: "Larushkin", raSlug: "larushkin", icon: "☼" },
-  { name: "Goose", raSlug: "goose-3", icon: "𓅬" },
-  { name: "Touré", raSlug: "toure", icon: "★" },
+  { name: "Neev", raSlug: "neev" },
+  { name: "Tia Radkiewicz" },
+  { name: "Sleepy Jean", raSlug: "sleepyjean" },
+  { name: "Holly Why", raSlug: "hollywhy" },
+  { name: "Larushkin", raSlug: "larushkin" },
+  { name: "Goose", raSlug: "goose-3" },
+  { name: "Touré", raSlug: "toure" },
 ].sort((a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" }));
 
-/** "Touré" → "toure", "Sleepy Jean" → "sleepy-jean" */
-export const artistAnchor = (a: Artist) =>
+/** The artist's page address: "Touré" → "toure", "Sleepy Jean" → "sleepy-jean" */
+export const artistSlug = (a: Artist) =>
   a.name
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/\p{M}/gu, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+
+export const findArtist = (slug: string) => artists.find((a) => artistSlug(a) === slug);

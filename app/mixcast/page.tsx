@@ -32,7 +32,7 @@ export default async function MixcastPage() {
             </article>
           ))}
         </div>
-        <p className="card-links">
+        <p className="link-row">
           <a href={site.soundcloud} target="_blank" rel="noreferrer">All mixes on SoundCloud ↗</a>
         </p>
       </main>

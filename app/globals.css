@@ -215,40 +215,6 @@ video.bg-media.is-playing {
   text-shadow: 0 0 14px rgba(11, 10, 8, 0.6), 0 1px 3px rgba(11, 10, 8, 0.45);
 }
 
-.ascii {
-  margin: 0;
-  font-family: inherit;
-  font-size: min(2vw, 1.6svh);
-  line-height: 1;
-  white-space: pre;
-  text-align: left;
-  user-select: none;
-}
-
-.ascii-row {
-  display: block;
-  height: 1em;
-}
-
-.ascii .sp {
-  display: inline-block;
-  width: 1ch;
-  height: 1em;
-  line-height: 1;
-  text-align: center;
-  vertical-align: top;
-  animation: twinkle 3.6s ease-in-out infinite;
-}
-
-.ascii .sp:nth-child(3n) { animation-delay: -1.2s; }
-.ascii .sp:nth-child(3n + 1) { animation-delay: -2.4s; }
-.ascii-row:nth-child(even) .sp { animation-duration: 4.8s; }
-
-@keyframes twinkle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.25; }
-}
-
 .home-word {
   display: flex;
   align-items: center;
@@ -359,12 +325,8 @@ video.bg-media.is-playing {
 
 /* roster */
 
-.roster-index {
-  margin-bottom: clamp(48px, 9vw, 110px);
-}
-
 .roster-index a,
-.card h2 {
+.artist h1 {
   font-family: var(--font-display), "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   letter-spacing: -0.01em;
@@ -372,9 +334,7 @@ video.bg-media.is-playing {
 }
 
 .roster-index a {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.28em;
+  display: inline-block;
   font-size: clamp(32px, 3.2vw, 46px);
   line-height: 1.1;
   transition: color 0.2s;
@@ -385,78 +345,72 @@ video.bg-media.is-playing {
   color: var(--accent);
 }
 
-/* each artist's own mark, revealed on hover */
-.roster-icon {
-  font-family: "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2", "Noto Sans Egyptian Hieroglyphs",
-    "Segoe UI Historic", sans-serif;
-  font-size: 0.72em;
-  line-height: 1;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateX(-0.25em);
-  transition: opacity 0.25s, transform 0.25s;
+/* artist pages */
+
+.back {
+  display: inline-block;
+  margin-bottom: 28px;
+  transition: color 0.2s;
 }
 
-.roster-index a:hover .roster-icon,
-.roster-index a:focus-visible .roster-icon {
-  opacity: 1;
-  transform: none;
+.back:hover {
+  color: var(--ink);
 }
 
-.cards {
+.artist {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
-  gap: clamp(48px, 6vw, 80px) clamp(28px, 4vw, 56px);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
 }
 
-.card {
-  min-width: 0;
-  scroll-margin-top: 84px;
+@media (min-width: 900px) {
+  .artist {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  }
 }
 
-.card-frame {
+.artist-photo {
   padding: 12px;
   border: 1px solid var(--accent);
 }
 
-.card-frame img,
-.card-blank {
+.artist-photo img,
+.artist-blank {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 1;
   object-fit: cover;
 }
 
 /* black & white until hovered */
-.card-frame img {
+.artist-photo img {
   filter: grayscale(1) contrast(1.04);
   transition: filter 0.5s ease;
 }
 
-.card-frame:hover img {
+.artist-photo:hover img {
   filter: none;
 }
 
-.card-blank {
+.artist-blank {
   display: grid;
   place-items: center;
   color: var(--accent);
   background: rgba(44, 52, 52, 0.06);
 }
 
-.card h2 {
-  margin-top: 22px;
-  font-size: 30px;
-  line-height: 1.15;
+.artist h1 {
+  font-size: clamp(40px, 5.2vw, 72px);
+  line-height: 1.02;
 }
 
-.card-bio {
-  margin-top: 10px;
-  color: var(--dim);
+.artist-bio {
+  margin-top: 14px;
+  max-width: 60ch;
 }
 
-.card h3 {
-  margin: 14px 0 4px;
+.artist h2 {
+  margin: 28px 0 4px;
   font-size: 15px;
   font-weight: 400;
   color: var(--accent);
@@ -506,19 +460,19 @@ video.bg-media.is-playing {
   border-bottom: 1px solid var(--ink);
 }
 
-.card-links {
+.link-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 10px 20px;
-  margin-top: 16px;
+  margin-top: 20px;
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--dim);
 }
 
-.card-links a:hover {
+.link-row a:hover {
   color: var(--accent);
 }
 
@@ -584,7 +538,7 @@ video.bg-media.is-playing {
   border: 0;
 }
 
-.mixes + .card-links {
+.mixes + .link-row {
   margin-top: 40px;
 }
 
@@ -732,14 +686,6 @@ video.bg-media.is-playing {
   cursor: default;
 }
 
-/* touch screens can't hover, so the artists' marks are always on */
-@media (hover: none) {
-  .roster-icon {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 @media (max-width: 520px) {
   .site-header .nav {
     font-size: 12px;
@@ -756,8 +702,7 @@ video.bg-media.is-playing {
     scroll-behavior: auto;
   }
   .grain,
-  .bg::before,
-  .ascii .sp {
+  .bg::before {
     animation: none;
   }
 }
